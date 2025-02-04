@@ -1,0 +1,47 @@
+body{
+    margin: 0px;
+    background-image: url("image/abstract-minimal-gradient-background-design_558873-62536.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container{
+    
+    background-color: rgb(211, 250, 188);
+   height: 100vh;
+   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.task-tap{
+    display: flex;
+    border-bottom: 1px solid lightblue;
+    position: relative;
+    
+}
+.task-tap div{
+    padding: 1rem;
+   
+}
+
+.task-line{
+    margin-top: 20px;
+    border: 1px solid lightblue;
+}
+
+#under-bar{
+    height: 4px;
+    background-color: pink;
+    position: absolute;
+    width: 70px;
+    left: 0px;
+    top: 52px;
+    padding: 0px;
+    
+}
+.tasks{
+    display: flex;
+    justify-content: space-between;
+}
+.tasks div{
+    padding: 1rem;
+}
