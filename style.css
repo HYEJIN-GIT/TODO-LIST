@@ -45,3 +45,7 @@ body{
 .tasks div{
     padding: 1rem;
 }
+
+.check-line{
+   text-decoration: line-through;
+}
