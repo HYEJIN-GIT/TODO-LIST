@@ -10,10 +10,23 @@
 
 let InputId = document.getElementById("input-id")
 let plusBtn = document.getElementById("plus")
+let allTab = document.querySelectorAll(".task-tap div")
 let taskList = []
+let mode ='all'
+let filterList = []
+let horizontalLine = document.getElementById("under-bar")
 
-
+allTab.forEach(menu=> menu.addEventListener("click",(e=>horizontal(e))))
 plusBtn.addEventListener("click",plusClick);
+
+
+
+
+for(let i=1;i<allTab.length;i++){
+   allTab[i].addEventListener("click",function(event){filter(event)})
+
+}
+
 
 
 
@@ -31,24 +44,38 @@ function plusClick(){
 }
 
 function render(){
+
+
+let allList = []
+
+if(mode === "all"){
+   allList = taskList;
+}else if(mode === "done"){
+   allList = filterList
+}else if (mode === "not-done")
+{
+   allList = filterList
+}
+
+
    let resultHTML = ''
-   for(let i = 0;i<taskList.length;i++){
-     if(taskList[i].isComplete == true){
+   for(let i = 0;i<allList.length;i++){
+     if(allList[i].isComplete == true){
       resultHTML+=`
       <div class="tasks">
-          <div class = "check-line">${taskList[i].taskValue}</div>
+          <div class = "check-line">${allList[i].taskValue}</div>
           <div>
-         <button onclick="checkBox('${taskList[i].id}')">check</button>
-           <button onclick="deleteBox('${taskList[i].id}')">Delete</button>
+         <button onclick="checkBox('${allList[i].id}')">check</button>
+           <button onclick="deleteBox('${allList[i].id}')">Delete</button>
            </div>
       </div>`
      }else{
       resultHTML+=`
       <div class="tasks">
-          <div>${taskList[i].taskValue}</div>
+          <div>${allList[i].taskValue}</div>
           <div>
-         <button onclick="checkBox('${taskList[i].id}')">check</button>
-           <button onclick="deleteBox('${taskList[i].id}')">Delete</button>
+         <button onclick="checkBox('${allList[i].id}')">check</button>
+           <button onclick="deleteBox('${allList[i].id}')">Delete</button>
            </div>
       </div>`
      }
@@ -88,7 +115,51 @@ render()
 }
 
 
+function filter(event){
+
+   mode = event.target.id
+   filterList =[]
+   console.log(mode)
+      if(mode == "all"){
+         render()
+      }else if(mode == "done"){
+         for(let i=0;i<taskList.length;i++){
+            if(taskList[i].isComplete == false){
+                filterList.push(taskList[i]);
+            }
+         }
+         render()
+
+
+      }else if(mode == "not-done"){
+         for(let i=0;i<taskList.length;i++){
+            if(taskList[i].isComplete == true){
+                filterList.push(taskList[i]);
+            }
+      }
+      render()
+
+   }
+}
+
+
+
+
+
+
+
+
+
+function horizontal(e){
+   horizontalLine.style.left = e.currentTarget.offsetLeft + "px";
+   horizontalLine.style.width = e.currentTarget.offsetWidth + "px";
+   horizontalLine.style.top =
+    e.currentTarget.offsetTop + e.currentTarget.offsetHeight + "px";
+}
+
+
 
 function randomIDGenerate(){
    return '_' + Math.random().toString(36).substring(2, 9)
 }
+

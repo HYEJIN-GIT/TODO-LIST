@@ -16,6 +16,8 @@ body{
     display: flex;
     border-bottom: 1px solid lightblue;
     position: relative;
+    cursor: pointer;
+    
     
 }
 .task-tap div{
@@ -32,10 +34,11 @@ body{
     height: 4px;
     background-color: pink;
     position: absolute;
-    width: 70px;
+    width: 0px;
     left: 0px;
-    top: 52px;
+    top: 0px;
     padding: 0px;
+    transition:0.5s;
     
 }
 .tasks{
@@ -49,3 +52,4 @@ body{
 .check-line{
    text-decoration: line-through;
 }
+
