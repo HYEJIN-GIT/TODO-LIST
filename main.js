@@ -162,3 +162,74 @@
 //    return '_' + Math.random().toString(36).substring(2, 9)
 // }
 
+
+
+let taskInput = document.getElementById("task-input");
+let taskPush = document.getElementById("plus-push");
+let taskList = []
+
+taskPush.addEventListener("click",plusPush);
+
+
+
+
+function plusPush(){
+   let taskValue = taskInput.value
+   let task = {
+      id :randomIDGenerate(),
+      taskValue: taskInput.value,
+      isComplete : false
+   }
+   taskList.push(task)
+
+   console.log(taskList)
+   render()
+}
+
+
+function render(){
+
+   let resultHTML = '';
+
+   for(let i = 0;i<taskList.length;i++){
+      if(taskList[i].isComplete == true){
+         resultHTML += ` <div class="tasks">
+         <div class = "check-line">${taskList[i].taskValue}</div>
+         <div>
+             <button onclick ="checkBtn('${taskList[i].id}')">CHECK</button>
+             <button>DELETE</button>
+         </div>
+     </div>`
+      }else{
+         resultHTML += ` <div class="tasks">
+         <div>${taskList[i].taskValue}</div>
+         <div>
+             <button onclick ="checkBtn('${taskList[i].id}')">CHECK</button>
+             <button>DELETE</button>
+         </div>
+     </div>`
+      }
+     
+
+   }
+  
+            document.getElementById("task-view").innerHTML = resultHTML;
+
+}
+
+function checkBtn(id){
+   for(let i=0;i<taskList.length;i++)
+            {
+                  if(taskList[i].id == id){
+                    taskList[i].isComplete = !taskList[i].isComplete;
+                    break;
+                  }
+         }
+         render()
+
+}
+
+
+function randomIDGenerate(){
+   return '_' + Math.random().toString(36).substring(2, 9)
+}

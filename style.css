@@ -75,6 +75,7 @@
     display: flex;
     border: 1px solid lightgray;
     margin-top: 30px;
+    position: relative;
 }
 
 .tabs div{
@@ -82,9 +83,23 @@
   
 }
 
+#under-bar{
+    position: absolute;
+    background-color: pink;
+    height: 4px;
+    top: 52px;
+    left: 0;
+    width: 70px;
+    padding: 0px;
+}
+
 .tasks{
     padding: 1rem;
     display: flex;
     justify-content: space-between;
     border: 1px solid lightgray;
+}
+
+.check-line{
+    text-decoration: line-through;
 }
