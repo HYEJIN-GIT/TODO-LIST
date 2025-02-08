@@ -7,142 +7,139 @@
 //전체탭을 누르면 다시 전체 보여줌
 //check 하는 순간 true - 끝난걸로 간주하고 밑줄 , false면 안끝난걸로 간주하고 그대로
 
+// let InputId = document.getElementById("input-id")
+// let plusBtn = document.getElementById("plus")
+// let allTab = document.querySelectorAll(".task-tap div")
+// let taskList = []
+// let mode ='all'
+// let filterList = []
+// let horizontalLine = document.getElementById("under-bar")
 
-let InputId = document.getElementById("input-id")
-let plusBtn = document.getElementById("plus")
-let allTab = document.querySelectorAll(".task-tap div")
-let taskList = []
-let mode ='all'
-let filterList = []
-let horizontalLine = document.getElementById("under-bar")
-
-allTab.forEach(menu=> menu.addEventListener("click",(e=>horizontal(e))))
-plusBtn.addEventListener("click",plusClick);
-
-
-
-
-for(let i=1;i<allTab.length;i++){
-   allTab[i].addEventListener("click",function(event){filter(event)})
-
-}
+// allTab.forEach(menu=> menu.addEventListener("click",(e=>horizontal(e))))
+// plusBtn.addEventListener("click",plusClick);
 
 
 
 
-function plusClick(){
-   let taskValue = InputId.value
+// for(let i=1;i<allTab.length;i++){
+//    allTab[i].addEventListener("click",function(event){filter(event)})
+
+// }
+
+
+
+
+// function plusClick(){
+//    let taskValue = InputId.value
    
-   let task = {
-      id : randomIDGenerate(),
-      taskValue : InputId.value,
-      isComplete : false
-   }
-   taskList.push(task)
-   render()
+//    let task = {
+//       id : randomIDGenerate(),
+//       taskValue : InputId.value,
+//       isComplete : false
+//    }
+//    taskList.push(task)
+//    render()
 
-}
+// }
 
-function render(){
-
-
-let allList = []
-
-if(mode === "all"){
-   allList = taskList;
-}else if(mode === "done"){
-   allList = filterList
-}else if (mode === "not-done")
-{
-   allList = filterList
-}
+// function render(){
 
 
-   let resultHTML = ''
-   for(let i = 0;i<allList.length;i++){
-     if(allList[i].isComplete == true){
-      resultHTML+=`
-      <div class="tasks">
-          <div class = "check-line">${allList[i].taskValue}</div>
-          <div>
-         <button onclick="checkBox('${allList[i].id}')">check</button>
-           <button onclick="deleteBox('${allList[i].id}')">Delete</button>
-           </div>
-      </div>`
-     }else{
-      resultHTML+=`
-      <div class="tasks">
-          <div>${allList[i].taskValue}</div>
-          <div>
-         <button onclick="checkBox('${allList[i].id}')">check</button>
-           <button onclick="deleteBox('${allList[i].id}')">Delete</button>
-           </div>
-      </div>`
-     }
+// let allList = []
+
+// if(mode === "all"){
+//    allList = taskList;
+// }else if(mode === "done"){
+//    allList = filterList
+// }else if (mode === "not-done")
+// {
+//    allList = filterList
+// }
+
+
+//    let resultHTML = ''
+//    for(let i = 0;i<allList.length;i++){
+//      if(allList[i].isComplete == true){
+//       resultHTML+=`
+//       <div class="tasks">
+//           <div class = "check-line">${allList[i].taskValue}</div>
+//           <div>
+//          <button onclick="checkBox('${allList[i].id}')">check</button>
+//            <button onclick="deleteBox('${allList[i].id}')">Delete</button>
+//            </div>
+//       </div>`
+//      }else{
+//       resultHTML+=`
+//       <div class="tasks">
+//           <div>${allList[i].taskValue}</div>
+//           <div>
+//          <button onclick="checkBox('${allList[i].id}')">check</button>
+//            <button onclick="deleteBox('${allList[i].id}')">Delete</button>
+//            </div>
+//       </div>`
+//      }
      
      
-   }
+//    }
 
 
 
 
 
-   document.getElementById("task-board").innerHTML = resultHTML;
+//    document.getElementById("task-board").innerHTML = resultHTML;
 
-}
+// }
 
-function checkBox(id){
+// function checkBox(id){
 
-   for(let i=0;i<taskList.length;i++)
-      {
-            if(taskList[i].id == id){
-              taskList[i].isComplete = !taskList[i].isComplete;
-              break;
-            }
-   }
-   render()
-}
+//    for(let i=0;i<taskList.length;i++)
+//       {
+//             if(taskList[i].id == id){
+//               taskList[i].isComplete = !taskList[i].isComplete;
+//               break;
+//             }
+//    }
+//    render()
+// }
 
-function deleteBox(id){
-   for(let i=0;i<taskList.length;i++){
-      if(taskList[i].id ==id){
-         taskList.splice(i,1)
-         break;
+// function deleteBox(id){
+//    for(let i=0;i<taskList.length;i++){
+//       if(taskList[i].id ==id){
+//          taskList.splice(i,1)
+//          break;
 
-      }
-   }
-render()
-}
-
-
-function filter(event){
-
-   mode = event.target.id
-   filterList =[]
-   console.log(mode)
-      if(mode == "all"){
-         render()
-      }else if(mode == "done"){
-         for(let i=0;i<taskList.length;i++){
-            if(taskList[i].isComplete == false){
-                filterList.push(taskList[i]);
-            }
-         }
-         render()
+//       }
+//    }
+// render()
+// }
 
 
-      }else if(mode == "not-done"){
-         for(let i=0;i<taskList.length;i++){
-            if(taskList[i].isComplete == true){
-                filterList.push(taskList[i]);
-            }
-      }
-      render()
+// function filter(event){
 
-   }
-}
+//    mode = event.target.id
+//    filterList =[]
+//    console.log(mode)
+//       if(mode == "all"){
+//          render()
+//       }else if(mode == "done"){
+//          for(let i=0;i<taskList.length;i++){
+//             if(taskList[i].isComplete == false){
+//                 filterList.push(taskList[i]);
+//             }
+//          }
+//          render()
 
 
+//       }else if(mode == "not-done"){
+//          for(let i=0;i<taskList.length;i++){
+//             if(taskList[i].isComplete == true){
+//                 filterList.push(taskList[i]);
+//             }
+//       }
+//       render()
+
+//    }
+// }
 
 
 
@@ -150,16 +147,18 @@ function filter(event){
 
 
 
-function horizontal(e){
-   horizontalLine.style.left = e.currentTarget.offsetLeft + "px";
-   horizontalLine.style.width = e.currentTarget.offsetWidth + "px";
-   horizontalLine.style.top =
-    e.currentTarget.offsetTop + e.currentTarget.offsetHeight + "px";
-}
+
+
+// function horizontal(e){
+//    horizontalLine.style.left = e.currentTarget.offsetLeft + "px";
+//    horizontalLine.style.width = e.currentTarget.offsetWidth + "px";
+//    horizontalLine.style.top =
+//     e.currentTarget.offsetTop + e.currentTarget.offsetHeight + "px";
+// }
 
 
 
-function randomIDGenerate(){
-   return '_' + Math.random().toString(36).substring(2, 9)
-}
+// function randomIDGenerate(){
+//    return '_' + Math.random().toString(36).substring(2, 9)
+// }
 
