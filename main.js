@@ -167,8 +167,12 @@
 let taskInput = document.getElementById("task-input");
 let taskPush = document.getElementById("plus-push");
 let taskList = []
+let mode = "ALL"
+let filterList = []
+let tabs = document.querySelectorAll(".tabs div")
 
 taskPush.addEventListener("click",plusPush);
+
 
 
 
@@ -197,7 +201,7 @@ function render(){
          <div class = "check-line">${taskList[i].taskValue}</div>
          <div>
              <button onclick ="checkBtn('${taskList[i].id}')">CHECK</button>
-             <button onclick ="deleteBtn('${taskList[i].id}')"></button>DELETE</button>
+             <button onclick ="deleteBtn('${taskList[i].id}')">DELETE</button>
          </div>
      </div>`
       }else{

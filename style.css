@@ -80,6 +80,7 @@
 
 .tabs div{
     padding: 1rem;
+    cursor: pointer;
   
 }
 
@@ -91,6 +92,7 @@
     left: 0;
     width: 70px;
     padding: 0px;
+    transition: 0.5s;
 }
 
 .tasks{
