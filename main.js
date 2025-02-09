@@ -167,13 +167,20 @@
 let taskInput = document.getElementById("task-input");
 let taskPush = document.getElementById("plus-push");
 let taskList = []
-let mode = "ALL"
+let mode = 'all'
 let filterList = []
 let tabs = document.querySelectorAll(".tabs div")
+let underBar = document.getElementById("under-bar")
+
 
 taskPush.addEventListener("click",plusPush);
+tabs.forEach(menu=> menu.addEventListener("click",(e=>underBarView(e))))
 
+for(let i = 1;i<tabs.length;i++){
 
+tabs[i].addEventListener("click",function(event){filter(event)})
+
+}
 
 
 
@@ -193,23 +200,34 @@ function plusPush(){
 
 function render(){
 
+   
+   let allList = []
+
+   if(mode == "all"){
+      allList = taskList
+   }else if(mode =="done"){
+      allList = filterList
+   }else if(mode =="not-done"){
+      allList = filterList
+   }
+
    let resultHTML = '';
 
-   for(let i = 0;i<taskList.length;i++){
-      if(taskList[i].isComplete == true){
+   for(let i = 0;i<allList.length;i++){
+      if(allList[i].isComplete == true){
          resultHTML += ` <div class="tasks">
-         <div class = "check-line">${taskList[i].taskValue}</div>
+         <div class = "check-line">${allList[i].taskValue}</div>
          <div>
-             <button onclick ="checkBtn('${taskList[i].id}')">CHECK</button>
-             <button onclick ="deleteBtn('${taskList[i].id}')">DELETE</button>
+             <button onclick ="checkBtn('${allList[i].id}')">CHECK</button>
+             <button onclick ="deleteBtn('${allList[i].id}')">DELETE</button>
          </div>
      </div>`
       }else{
          resultHTML += ` <div class="tasks">
-         <div>${taskList[i].taskValue}</div>
+         <div>${allList[i].taskValue}</div>
          <div>
-             <button onclick ="checkBtn('${taskList[i].id}')">CHECK</button>
-             <button onclick ="deleteBtn('${taskList[i].id}')">DELETE</button>
+             <button onclick ="checkBtn('${allList[i].id}')">CHECK</button>
+             <button onclick ="deleteBtn('${allList[i].id}')">DELETE</button>
          </div>
      </div>`
       }
@@ -243,7 +261,39 @@ function deleteBtn(id){
    render()
 }
 
+function filter(event){
+   mode = event.target.id
+   console.log(mode)
+   filterList = []
 
+   if(mode == "all"){
+     render()
+   }else if(mode == "done"){
+      for(let i=0;i<taskList.length;i++){
+         if(taskList[i].isComplete == false){
+            filterList.push(taskList[i])
+         }
+        
+      }
+      render()
+   }else if(mode == "not-done"){
+      for(let i=0;i<taskList.length;i++){
+         if(taskList[i].isComplete == true){
+            filterList.push(taskList[i])
+         }
+        
+      }
+      render()
+   }
+}
+
+function underBarView(e){
+      underBar.style.left = e.currentTarget.offsetLeft + "px";
+   underBar.style.width = e.currentTarget.offsetWidth + "px";
+  underBar.style.top =
+    e.currentTarget.offsetTop + e.currentTarget.offsetHeight + "px";
+
+}
 
 function randomIDGenerate(){
    return '_' + Math.random().toString(36).substring(2, 9)
